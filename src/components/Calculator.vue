@@ -176,12 +176,12 @@ export default {
     fixFloat (float) {
       float = float.toFixed(5)
       float.replace(/0+$/, '')
-      return parseFloat(float)
+      return parseFloat(float).toString()
     },
 
     // 清空显示屏
     clearText () {
-      this.screen = 0
+      this.screen = '0'
       this.clearButton = 'AC'
     },
 
@@ -195,15 +195,11 @@ export default {
     // 键盘输入打开
     keyBoardOn () {
       this.keyboardIndicator = true
-      // this.$refs.title.$refs.keyboardIndicator.setAttribute('style', 'color: #fff')
-      // this.$refs.title.$refs.keyboardIndicator.innerText = 'KEYBOARD ON'
     },
 
     // 键盘输入关闭
     keyBoardOff () {
       this.keyboardIndicator = false
-      // this.$refs.title.$refs.keyboardIndicator.setAttribute('style', 'color: #bbb')
-      // this.$refs.title.$refs.keyboardIndicator.innerText = 'KEYBOARD OFF'
     }
   },
   mounted () {

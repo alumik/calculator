@@ -1,10 +1,23 @@
 <template>
-  <input ref="input" @keypress="keyPressed" @focus="onFocus" @blur="onBlur" title="计算结果" readonly="readonly"/>
+  <input
+    ref="input"
+    @keypress="keyPressed"
+    @focus="onFocus"
+    @blur="onBlur"
+    title="计算结果"
+    :value="screen"
+    readonly="readonly"
+  />
 </template>
 
 <script>
 export default {
   name: 'Screen',
+  props: {
+    screen: {
+      require: true
+    }
+  },
   methods: {
     onFocus () {
       this.$emit('keyBoardOn')
@@ -38,9 +51,9 @@ export default {
     padding: 35px 30px 25px;
     width: 100%;
     height: 120px;
+    border-style: none;
     background-color: transparent;
     color: #fff;
-    border-style: none;
     text-align: right;
     font-size: 84px;
     font-family: 'helvetica_neue_ultralight', Helvetica, Arial, sans-serif;

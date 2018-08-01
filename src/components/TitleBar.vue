@@ -3,23 +3,40 @@
     <div class="btn-round btn-round-red"></div>
     <div class="btn-round btn-round-yellow"></div>
     <div class="btn-round btn-round-green"></div>
-    <div ref="keyboardIndicator" id="keyboard-indicator">KEYBOARD OFF</div>
+    <div ref="keyboardIndicator" class="keyboard-indicator">KEYBOARD OFF</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TitleBar'
+  name: 'TitleBar',
+  props: {
+    keyboardIndicator: {
+      required: true,
+      type: Boolean
+    }
+  },
+  watch: {
+    keyboardIndicator (nv, ov) {
+      if (nv) {
+        this.$refs.keyboardIndicator.setAttribute('style', 'color: #fff')
+        this.$refs.keyboardIndicator.innerText = 'KEYBOARD ON'
+      } else {
+        this.$refs.keyboardIndicator.setAttribute('style', 'color: #bbb')
+        this.$refs.keyboardIndicator.innerText = 'KEYBOARD OFF'
+      }
+    }
+  }
 }
 </script>
 
 <style scoped>
   div {
-    box-sizing: border-box;
     display: flex;
+    box-sizing: border-box;
+    margin: 0;
     width: 100%;
     box-shadow: none;
-    margin: 0;
   }
 
   .btn-round {
@@ -54,7 +71,7 @@ export default {
     background-color: #219732;
   }
 
-  #keyboard-indicator {
+  .keyboard-indicator {
     display: inline-block;
     margin: 10px 15px 0 0;
     color: #bbb;
