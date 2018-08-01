@@ -1,7 +1,7 @@
 <template>
   <div>
-    <TitleBar ref="title"></TitleBar>
-    <Screen ref="screen" @keyBoardOn="keyBoardOn" @keyBoardOff="keyBoardOff" @keyPressed="keyPressed"></Screen>
+    <TitleBar :keyboardIndicator="keyboardIndicator"></TitleBar>
+    <Screen :screen="screen" @keyBoardOn="keyBoardOn" @keyBoardOff="keyBoardOff" @keyPressed="keyPressed"></Screen>
     <Keypad @btnPressed="btnPressed"></Keypad>
   </div>
 </template>
@@ -17,10 +17,14 @@ export default {
     return {
       left: 0,
       operator: '',
-      is_new_input: true
+      is_new_input: true,
+      screen: '0',
+      clearButton: 'AC',
+      keyboardIndicator: false
     }
   },
   methods: {
+    // 屏幕按键按下
     btnPressed (button) {
       switch (button.type) {
         case 'btn-clear':
@@ -44,6 +48,7 @@ export default {
       }
     },
 
+    // 实体按键按下
     keyPressed (e) {
       if ((e.key >= '0' && e.key <= '9') || e.key === '.') {
         this.appendText(e.key)
@@ -64,26 +69,30 @@ export default {
       }
     },
 
+    // C/AC键功能
     btnClear () {
       // 只有在清除键为“AC”时才清除参数
-      if (this.$refs.screen.$refs.input.value === 'AC') {
+      if (this.clearButton === 'AC') {
         this.resetArguments()
       }
       this.clearText()
     },
 
+    // +/-键功能
     btnChangeSign () {
-      if (this.$refs.screen.$refs.input.value !== 'ERROR') {
-        this.$refs.screen.$refs.input.value = this.fixFloat(this.$refs.screen.$refs.input.value *= -1)
+      if (this.screen !== 'ERROR') {
+        this.screen = this.fixFloat(this.screen *= -1)
       }
     },
 
+    // 百分号键功能
     btnPercentage () {
-      if (this.$refs.screen.$refs.input.value !== 'ERROR') {
-        this.$refs.screen.$refs.input.value = this.fixFloat(this.$refs.screen.$refs.input.value *= 0.01)
+      if (this.screen !== 'ERROR') {
+        this.screen = this.fixFloat(this.screen *= 0.01)
       }
     },
 
+    // 数字键和小数点键功能
     appendText (number) {
       // 判断是否需要清空输入框
       if (this.is_new_input) {
@@ -91,35 +100,37 @@ export default {
         this.is_new_input = false
       }
       // 如果输入框中为0就把0覆盖掉
-      if (this.$refs.screen.$refs.input.value === '0' && number !== '.') {
-        this.$refs.screen.$refs.input.value = ''
+      if (this.screen === '0' && number !== '.') {
+        this.screen = ''
       }
       // 如果有输入且不改变原来的0就把清除键设为“C”
       if (number !== '0') {
-        this.$emit('setClearBtn')
+        this.clearButton = 'C'
       }
       // 设置只能输入一个小数点
-      if (number === '.' && this.$refs.screen.$refs.input.value.indexOf('.') !== -1) {
+      if (number === '.' && this.screen.indexOf('.') !== -1) {
         return
       }
       // 如果输入框中字符小于7个才能继续输入
-      if (this.$refs.screen.$refs.input.value.length < 7) {
-        this.$refs.screen.$refs.input.value += number
+      if (this.screen.length < 7) {
+        this.screen += number
       }
     },
 
+    // 运算符键功能
     btnOperator (operator) {
-      if (this.$refs.screen.$refs.input.value !== 'ERROR') {
+      if (this.screen !== 'ERROR') {
         this.calculate()
-        this.left = parseFloat(this.$refs.screen.$refs.input.value)
+        this.left = parseFloat(this.screen)
         this.operator = operator
         this.is_new_input = true
       }
     },
 
+    // 进行计算
     calculate () {
       // 暂存右值
-      let right = parseFloat(this.$refs.screen.$refs.input.value)
+      let right = parseFloat(this.screen)
 
       // 尝试计算
       try {
@@ -147,45 +158,52 @@ export default {
               answer = 'ERROR'
           }
           if (answer !== 'ERROR') {
-            this.$refs.screen.$refs.input.value = this.fixFloat(answer)
+            this.screen = this.fixFloat(answer)
           } else {
-            this.$refs.screen.$refs.input.value = 'ERROR'
+            this.screen = 'ERROR'
           }
-          this.$emit('setAllClearBtn')
+          this.clearButton = 'AC'
         }
       } catch (e) {
-        this.$refs.screen.$refs.input.value = 'ERROR'
-        this.$emit('setAllClearBtn')
+        this.screen = 'ERROR'
+        this.clearButton = 'AC'
       } finally {
         this.resetArguments()
       }
     },
 
+    // 修复浮点精度问题
     fixFloat (float) {
       float = float.toFixed(5)
       float.replace(/0+$/, '')
       return parseFloat(float)
     },
 
+    // 清空显示屏
     clearText () {
-      this.$refs.screen.$refs.input.value = 0
-      this.$emit('setAllClearBtn')
+      this.screen = 0
+      this.clearButton = 'AC'
     },
 
+    // 重置参数
     resetArguments () {
       this.left = 0
       this.operator = ''
       this.is_new_input = true
     },
 
+    // 键盘输入打开
     keyBoardOn () {
-      this.$refs.title.$refs.keyboardIndicator.setAttribute('style', 'color: #fff')
-      this.$refs.title.$refs.keyboardIndicator.innerText = 'KEYBOARD ON'
+      this.keyboardIndicator = true
+      // this.$refs.title.$refs.keyboardIndicator.setAttribute('style', 'color: #fff')
+      // this.$refs.title.$refs.keyboardIndicator.innerText = 'KEYBOARD ON'
     },
 
+    // 键盘输入关闭
     keyBoardOff () {
-      this.$refs.title.$refs.keyboardIndicator.setAttribute('style', 'color: #bbb')
-      this.$refs.title.$refs.keyboardIndicator.innerText = 'KEYBOARD OFF'
+      this.keyboardIndicator = false
+      // this.$refs.title.$refs.keyboardIndicator.setAttribute('style', 'color: #bbb')
+      // this.$refs.title.$refs.keyboardIndicator.innerText = 'KEYBOARD OFF'
     }
   },
   mounted () {
