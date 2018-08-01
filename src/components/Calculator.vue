@@ -72,30 +72,16 @@ export default {
       this.clearText()
     },
 
-    btnPercentage () {
-      if (this.$refs.screen.$refs.input.value !== 'ERROR') {
-        this.$refs.screen.$refs.input.value = this.fixFloat(this.$refs.screen.$refs.input.value *= 0.01)
-      }
-    },
-
     btnChangeSign () {
       if (this.$refs.screen.$refs.input.value !== 'ERROR') {
         this.$refs.screen.$refs.input.value = this.fixFloat(this.$refs.screen.$refs.input.value *= -1)
       }
     },
 
-    btnOperator (operator) {
+    btnPercentage () {
       if (this.$refs.screen.$refs.input.value !== 'ERROR') {
-        this.calculate()
-        this.left = parseFloat(this.$refs.screen.$refs.input.value)
-        this.operator = operator
-        this.is_new_input = true
+        this.$refs.screen.$refs.input.value = this.fixFloat(this.$refs.screen.$refs.input.value *= 0.01)
       }
-    },
-
-    clearText () {
-      this.$refs.screen.$refs.input.value = 0
-      this.$emit('setAllClearBtn')
     },
 
     appendText (number) {
@@ -119,6 +105,15 @@ export default {
       // 如果输入框中字符小于7个才能继续输入
       if (this.$refs.screen.$refs.input.value.length < 7) {
         this.$refs.screen.$refs.input.value += number
+      }
+    },
+
+    btnOperator (operator) {
+      if (this.$refs.screen.$refs.input.value !== 'ERROR') {
+        this.calculate()
+        this.left = parseFloat(this.$refs.screen.$refs.input.value)
+        this.operator = operator
+        this.is_new_input = true
       }
     },
 
@@ -172,6 +167,11 @@ export default {
       return parseFloat(float)
     },
 
+    clearText () {
+      this.$refs.screen.$refs.input.value = 0
+      this.$emit('setAllClearBtn')
+    },
+
     resetArguments () {
       this.left = 0
       this.operator = ''
@@ -181,7 +181,6 @@ export default {
     keyBoardOn () {
       this.$refs.title.$refs.keyboardIndicator.setAttribute('style', 'color: #fff')
       this.$refs.title.$refs.keyboardIndicator.innerText = 'KEYBOARD ON'
-      console.log(1)
     },
 
     keyBoardOff () {
@@ -196,19 +195,18 @@ export default {
 </script>
 
 <style scoped>
-div {
-  display: flex;
-  box-sizing: border-box;
-  margin: 100px auto;
-  padding: 1px;
-  width: 50%;
-  max-width: 430px;
-  min-width: 330px;
-  border-radius: 10px;
-  background-color: #999;
-  /* 阴影效果来自 https://codepen.io/sdthornton/pen/wBZdXq */
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  flex-direction: row;
-  flex-wrap: wrap;
-}
+  div {
+    display: flex;
+    box-sizing: border-box;
+    margin: 100px auto;
+    padding: 1px;
+    width: 50%;
+    max-width: 430px;
+    min-width: 330px;
+    border-radius: 10px;
+    background-color: #999;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 </style>

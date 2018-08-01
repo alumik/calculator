@@ -27,7 +27,7 @@
     <button class="btn-large btn-number btn-bottom-left" @click="btnNumber('0')">0</button>
     <button class="btn-number" @click="btnNumber('.')">.</button>
 
-    <button id="btn-equal" class="btn-equal btn-bottom-right" @click="btnEqual()">=</button>
+    <button class="btn-equal btn-bottom-right" @click="btnEqual()">=</button>
   </div>
 </template>
 
@@ -36,15 +36,15 @@ export default {
   name: 'Keypad',
   methods: {
     btnClear () {
-      this.$emit('btnPressed', { type: 'btn-clear', data: '' })
+      this.$emit('btnPressed', { type: 'btn-clear' })
     },
 
     btnChangeSign () {
-      this.$emit('btnPressed', { type: 'btn-changesign', data: '' })
+      this.$emit('btnPressed', { type: 'btn-changesign' })
     },
 
     btnPercentage () {
-      this.$emit('btnPressed', { type: 'btn-percentage', data: '' })
+      this.$emit('btnPressed', { type: 'btn-percentage' })
     },
 
     btnNumber (number) {
@@ -56,7 +56,7 @@ export default {
     },
 
     btnEqual () {
-      this.$emit('btnPressed', { type: 'btn-equal', data: '' })
+      this.$emit('btnPressed', { type: 'btn-equal' })
     }
   }
 }
@@ -84,11 +84,11 @@ export default {
   button {
     margin: 1px;
     height: 80px;
+    border-style: none;
     text-align: center;
     font-family: 'helvetica_neue', Helvetica, Arial, sans-serif;
     cursor: pointer;
     flex: 1 1 24%;
-    border-style: none;
   }
 
   button:focus {
