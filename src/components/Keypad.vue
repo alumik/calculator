@@ -1,98 +1,56 @@
 <template>
   <div>
-    <button class="btn-secondary" @click="btnClear()">AC</button>
-    <button class="btn-secondary" @click="btnChangeSign()">+/-</button>
-    <button class="btn-secondary" @click="btnPercentage()">%</button>
+    <Button class="btn-secondary" caption="AC" @btnClick="btnClick"></Button>
+    <Button class="btn-secondary" caption="+/-" @btnClick="btnClick"></Button>
+    <Button class="btn-secondary" caption="%" @btnClick="btnClick"></Button>
 
-    <button class="btn-operator" @click="btnOperator('÷')">÷</button>
+    <Button class="btn-operator" caption="÷" @btnClick="btnClick"></Button>
 
-    <button class="btn-number" @click="btnNumber('7')">7</button>
-    <button class="btn-number" @click="btnNumber('8')">8</button>
-    <button class="btn-number" @click="btnNumber('9')">9</button>
+    <Button class="btn-number" caption="7" @btnClick="btnClick"></Button>
+    <Button class="btn-number" caption="8" @btnClick="btnClick"></Button>
+    <Button class="btn-number" caption="9" @btnClick="btnClick"></Button>
 
-    <button class="btn-operator" @click="btnOperator('×')">×</button>
+    <Button class="btn-operator" caption="×" @btnClick="btnClick"></Button>
 
-    <button class="btn-number" @click="btnNumber('4')">4</button>
-    <button class="btn-number" @click="btnNumber('5')">5</button>
-    <button class="btn-number" @click="btnNumber('6')">6</button>
+    <Button class="btn-number" caption="4" @btnClick="btnClick"></Button>
+    <Button class="btn-number" caption="5" @btnClick="btnClick"></Button>
+    <Button class="btn-number" caption="6" @btnClick="btnClick"></Button>
 
-    <button class="btn-operator" @click="btnOperator('-')">-</button>
+    <Button class="btn-operator" caption="-" @btnClick="btnClick"></Button>
 
-    <button class="btn-number" @click="btnNumber('1')">1</button>
-    <button class="btn-number" @click="btnNumber('2')">2</button>
-    <button class="btn-number" @click="btnNumber('3')">3</button>
+    <Button class="btn-number" caption="1" @btnClick="btnClick"></Button>
+    <Button class="btn-number" caption="2" @btnClick="btnClick"></Button>
+    <Button class="btn-number" caption="3" @btnClick="btnClick"></Button>
 
-    <button class="btn-operator" @click="btnOperator('+')">+</button>
+    <Button class="btn-operator" caption="+" @btnClick="btnClick"></Button>
 
-    <button class="btn-large btn-number btn-bottom-left" @click="btnNumber('0')">0</button>
-    <button class="btn-number" @click="btnNumber('.')">.</button>
+    <Button class="btn-large btn-number btn-bottom-left" caption="0" @btnClick="btnClick"></Button>
+    <Button class="btn-number" caption="." @btnClick="btnClick"></Button>
 
-    <button class="btn-equal btn-bottom-right" @click="btnEqual()">=</button>
+    <Button class="btn-equal btn-bottom-right" caption="=" @btnClick="btnClick"></Button>
   </div>
 </template>
 
 <script>
+import Button from '@/components/Button'
 export default {
   name: 'Keypad',
+  components: { Button },
   methods: {
-    btnClear () {
-      this.$emit('btnPressed', { type: 'btn-clear' })
-    },
-
-    btnChangeSign () {
-      this.$emit('btnPressed', { type: 'btn-changesign' })
-    },
-
-    btnPercentage () {
-      this.$emit('btnPressed', { type: 'btn-percentage' })
-    },
-
-    btnNumber (number) {
-      this.$emit('btnPressed', { type: 'btn-number', data: number })
-    },
-
-    btnOperator (operator) {
-      this.$emit('btnPressed', { type: 'btn-operator', data: operator })
-    },
-
-    btnEqual () {
-      this.$emit('btnPressed', { type: 'btn-equal' })
+    btnClick (btn) {
+      this.$emit('btnClick', btn)
     }
   }
 }
 </script>
 
 <style scoped>
-  @font-face{
-    font-weight: normal;
-    font-style: normal;
-    font-family: 'helvetica_neue';
-    src: url('../assets/fonts/helveticaneue-webfont.eot');
-    src: url('../assets/fonts/helveticaneue-webfont.eot') format('embedded-opentype'),
-    url('../assets/fonts/helveticaneue-webfont.woff') format('woff'),
-    url('../assets/fonts/helveticaneue-webfont.ttf') format('truetype'),
-    url('../assets/fonts/helveticaneue-webfont.svg') format('svg');
-  }
 
   div {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     width: 100%;
-  }
-
-  button {
-    margin: 1px;
-    height: 80px;
-    border-style: none;
-    text-align: center;
-    font-family: 'helvetica_neue', Helvetica, Arial, sans-serif;
-    cursor: pointer;
-    flex: 1 1 24%;
-  }
-
-  button:focus {
-    outline: none;
   }
 
   .btn-operator, .btn-equal {
