@@ -2,7 +2,7 @@
   <div>
     <TitleBar :keyboardIndicator="keyboardIndicator"></TitleBar>
     <Screen :screen="screen" @keyBoardOn="keyBoardOn" @keyBoardOff="keyBoardOff" @keyPressed="keyPressed"></Screen>
-    <Keypad @btnPressed="btnPressed"></Keypad>
+    <Keypad @btnClick="btnClick"></Keypad>
   </div>
 </template>
 
@@ -25,26 +25,19 @@ export default {
   },
   methods: {
     // 屏幕按键按下
-    btnPressed (button) {
-      switch (button.type) {
-        case 'btn-clear':
-          this.btnClear()
-          break
-        case 'btn-changesign':
-          this.btnChangeSign()
-          break
-        case 'btn-percentage':
-          this.btnPercentage()
-          break
-        case 'btn-number':
-          this.appendText(button.data)
-          break
-        case 'btn-operator':
-          this.btnOperator(button.data)
-          break
-        case 'btn-equal':
-          this.calculate()
-          break
+    btnClick (btn) {
+      if ((btn >= '0' && btn <= '9') || btn === '.') {
+        this.appendText(btn)
+      } else if (btn === '+' || btn === '-' || btn === '×' || btn === '÷') {
+        this.btnOperator(btn)
+      } else if (btn === '%') {
+        this.btnPercentage()
+      } else if (btn === '=') {
+        this.calculate()
+      } else if (btn === 'C' || btn === 'AC') {
+        this.btnClear()
+      } else if (btn === '+/-') {
+        this.btnChangeSign()
       }
     },
 
