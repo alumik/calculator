@@ -35,13 +35,13 @@
 
 1. 安装依赖。
 
-    ```
+    ```shell
     npm install
     ```
 
 2. 在 localhost:8080 启动开发服务器。
 
-    ```
+    ```shell
     npm run dev
     ```
 
