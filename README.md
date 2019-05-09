@@ -1,8 +1,6 @@
 # 简单计算器
 
-利用 [Vue.js](https://vuejs.org/) 框架制作的一个简单计算器。
-
-演示网站 [https://calculator.ret.red](https://calculator.ret.red)
+项目基于 [Vue.js](https://vuejs.org/) 制作。
 
 ## 说明
 
