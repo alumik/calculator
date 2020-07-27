@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="calculator">
     <TitleBar :keyboardIndicator="keyboardIndicator"></TitleBar>
     <Screen :screen="screen" @keyBoardOn="keyBoardOn" @keyBoardOff="keyBoardOff" @keyPressed="keyPressed"></Screen>
     <Keypad @btnClick="btnClick"></Keypad>
@@ -7,9 +7,10 @@
 </template>
 
 <script>
-import TitleBar from '@/components/TitleBar'
-import Screen from '@/components/Screen'
-import Keypad from '@/components/Keypad'
+import TitleBar from './TitleBar'
+import Screen from './Screen'
+import Keypad from './Keypad'
+
 export default {
   name: 'Calculator',
   components: { Keypad, Screen, TitleBar },
@@ -123,7 +124,7 @@ export default {
     // 进行计算
     calculate () {
       // 暂存右值
-      let right = parseFloat(this.screen)
+      const right = parseFloat(this.screen)
 
       // 尝试计算
       try {
@@ -202,7 +203,7 @@ export default {
 </script>
 
 <style scoped>
-  div {
+  .calculator {
     display: flex;
     box-sizing: border-box;
     margin: 100px auto;
@@ -212,7 +213,7 @@ export default {
     min-width: 330px;
     border-radius: 10px;
     background-color: #999;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     flex-direction: row;
     flex-wrap: wrap;
   }

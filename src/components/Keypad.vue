@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="keypad">
     <Button class="btn-secondary" caption="AC" @btnClick="btnClick"></Button>
     <Button class="btn-secondary" caption="+/-" @btnClick="btnClick"></Button>
     <Button class="btn-secondary" caption="%" @btnClick="btnClick"></Button>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Button from '@/components/Button'
+import Button from './Button'
 export default {
   name: 'Keypad',
   components: { Button },
@@ -45,9 +45,16 @@ export default {
 </script>
 
 <style scoped>
-
-  div {
+  .keypad {
+    display: flex;
     box-sizing: border-box;
+    max-width: 430px;
+    min-width: 330px;
+    border-radius: 10px;
+    background-color: #999;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: 0;
     padding: 0;
     width: 100%;
