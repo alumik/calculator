@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <router-view/>
+    <Calculator/>
   </div>
 </template>
 
 <script>
+import Calculator from './components/Calculator'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Calculator
+  }
 }
 </script>
 
@@ -14,6 +19,7 @@ export default {
   * {
     box-sizing: border-box;
   }
+
   body {
     background-color: #f5f5f5;
     user-select: none;

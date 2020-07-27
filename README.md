@@ -31,16 +31,25 @@
 
 ## 运行方法
 
-1. 安装依赖。
+## 安装依赖
+```
+npm install
+```
 
-    ```shell
-    npm install
-    ```
+### 编译并运行开发服务器
+```
+npm run serve
+```
 
-2. 在 localhost:8080 启动开发服务器。
+### 编译并为生产环境优化
+```
+npm run build
+```
 
-    ```shell
-    npm run dev
-    ```
+### 运行 Lint
+```
+npm run lint
+```
 
-更多信息请参阅 [指引](http://vuejs-templates.github.io/webpack/) 和 [vue-loader 文档](http://vuejs.github.io/vue-loader)。
+### 自定义配置
+参见 [Configuration Reference](https://cli.vuejs.org/config/).

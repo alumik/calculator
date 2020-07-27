@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="title-bar">
     <div class="btn-round btn-round-red"></div>
     <div class="btn-round btn-round-yellow"></div>
     <div class="btn-round btn-round-green"></div>
@@ -17,7 +17,7 @@ export default {
     }
   },
   watch: {
-    keyboardIndicator (nv, ov) {
+    keyboardIndicator (nv) {
       if (nv) {
         this.$refs.keyboardIndicator.setAttribute('style', 'color: #fff')
         this.$refs.keyboardIndicator.innerText = 'KEYBOARD ON'
@@ -31,9 +31,16 @@ export default {
 </script>
 
 <style scoped>
-  div {
+  .title-bar {
     display: flex;
     box-sizing: border-box;
+    padding: 1px;
+    max-width: 430px;
+    min-width: 330px;
+    border-radius: 10px;
+    background-color: #999;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: 0;
     width: 100%;
     box-shadow: none;
