@@ -52,4 +52,4 @@ npm run lint
 ```
 
 ### 自定义配置
-参见 [Configuration Reference](https://cli.vuejs.org/config/).
+参见 [Configuration Reference](https://cli.vuejs.org/config/)。
