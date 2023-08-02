@@ -7,18 +7,18 @@
 
 To use keyboard input, you need to **click on the answer area** to focus it. "KEYBOARD ON" will appear in the top right corner. The key mappings are as follows:
 
-    | Function | Key                         |
-    | -------- | --------------------------- |
-    | C/AC     | `c` / `C`                   |
-    | +/-      | `~` (shift+&#96;)           |
-    | %        | `%` (shift+5)               |
-    | +        | `+` / `NUM+`                |
-    | -        | `-` / `NUM-`                |
-    | ×        | `*` (shift+8) / `NUM*`      |
-    | ÷        | `/` / `NUM/`                |
-    | =        | `Enter` / `NUM Enter` / `=` |
-    | 0~9      | `0`\~`9` / `NUM0`\~`NUM9`   |
-    | .        | `.` / `NUM.`                |
+| Function | Key                         |
+| -------- | --------------------------- |
+| C/AC     | `c` / `C`                   |
+| +/-      | `~` (shift+&#96;)           |
+| %        | `%` (shift+5)               |
+| +        | `+` / `NUM+`                |
+| -        | `-` / `NUM-`                |
+| ×        | `*` (shift+8) / `NUM*`      |
+| ÷        | `/` / `NUM/`                |
+| =        | `Enter` / `NUM Enter` / `=` |
+| 0~9      | `0`\~`9` / `NUM0`\~`NUM9`   |
+| .        | `.` / `NUM.`                |
 
 Pressing the clear key once clears the current step, and pressing it again clears everything.
 
