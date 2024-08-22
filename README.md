@@ -1,6 +1,6 @@
 # Simple Calculator
 
-![version-2.0.1](https://img.shields.io/badge/version-2.0.1-blue)
+![version-2.0.2](https://img.shields.io/badge/version-2.0.2-blue)
 ![license-MIT](https://img.shields.io/badge/license-MIT-green)
 
 ## Instructions
