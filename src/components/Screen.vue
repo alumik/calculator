@@ -4,7 +4,7 @@
     @keypress="keyPressed"
     @focus="onFocus"
     @blur="onBlur"
-    title="计算结果"
+    title="Screen"
     :value="screen"
     readonly="readonly"
   />

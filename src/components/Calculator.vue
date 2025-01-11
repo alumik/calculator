@@ -25,7 +25,6 @@ export default {
     }
   },
   methods: {
-    // 屏幕按键按下
     btnClick (btn) {
       if ((btn >= '0' && btn <= '9') || btn === '.') {
         this.appendText(btn)
@@ -42,7 +41,6 @@ export default {
       }
     },
 
-    // 实体按键按下
     keyPressed (e) {
       if ((e.key >= '0' && e.key <= '9') || e.key === '.') {
         this.appendText(e.key)
@@ -63,7 +61,6 @@ export default {
       }
     },
 
-    // C/AC键功能
     btnClear () {
       // 只有在清除键为“AC”时才清除参数
       if (this.clearButton === 'AC') {
@@ -72,46 +69,43 @@ export default {
       this.clearText()
     },
 
-    // +/-键功能
     btnChangeSign () {
       if (this.screen !== 'ERROR') {
         this.screen = this.fixFloat(this.screen *= -1)
       }
     },
 
-    // 百分号键功能
     btnPercentage () {
       if (this.screen !== 'ERROR') {
         this.screen = this.fixFloat(this.screen *= 0.01)
       }
     },
 
-    // 数字键和小数点键功能
+    // Number input
     appendText (number) {
-      // 判断是否需要清空输入框
+      // Clear the screen if a new input is detected
       if (this.is_new_input) {
         this.clearText()
         this.is_new_input = false
       }
-      // 如果输入框中为0就把0覆盖掉
+      // If the screen is 0 and the input is not a decimal, clear the screen
       if (this.screen === '0' && number !== '.') {
         this.screen = ''
       }
-      // 如果有输入且不改变原来的0就把清除键设为“C”
+      // If the screen is not 0, change the clear button to 'C'
       if (number !== '0') {
         this.clearButton = 'C'
       }
-      // 设置只能输入一个小数点
+      // If the input is a decimal and the screen already has a decimal, return
       if (number === '.' && this.screen.indexOf('.') !== -1) {
         return
       }
-      // 如果输入框中字符小于7个才能继续输入
+      // If the screen length is less than 7, append the number to the screen
       if (this.screen.length < 7) {
         this.screen += number
       }
     },
 
-    // 运算符键功能
     btnOperator (operator) {
       if (this.screen !== 'ERROR') {
         this.calculate()
@@ -121,14 +115,12 @@ export default {
       }
     },
 
-    // 进行计算
     calculate () {
-      // 暂存右值
+      // Store the value of the right side of the equation
       const right = parseFloat(this.screen)
 
-      // 尝试计算
       try {
-        // 如果有运算符且不需要输入新值才计算
+        // If there is an operator and the input is not new
         if (this.operator !== '' && this.is_new_input !== true) {
           let answer
           switch (this.operator) {
@@ -166,32 +158,27 @@ export default {
       }
     },
 
-    // 修复浮点精度问题
     fixFloat (float) {
       float = float.toFixed(5)
       float.replace(/0+$/, '')
       return parseFloat(float).toString()
     },
 
-    // 清空显示屏
     clearText () {
       this.screen = '0'
       this.clearButton = 'AC'
     },
 
-    // 重置参数
     resetArguments () {
       this.left = 0
       this.operator = ''
       this.is_new_input = true
     },
 
-    // 键盘输入打开
     keyBoardOn () {
       this.keyboardIndicator = true
     },
 
-    // 键盘输入关闭
     keyBoardOff () {
       this.keyboardIndicator = false
     }
